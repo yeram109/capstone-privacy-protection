@@ -61,7 +61,14 @@ capstone-privacy-protection/
 pip install -r requirements.txt
 ```
 
-> **GUI 앱의 Eye Detection / Eye Blurring 기능** 사용 시 YOLOv5 커스텀 모델(`best.pt`)이 추가로 필요합니다.
+> **GUI 앱의 Eye Detection / Eye Blurring 기능** 사용 시 아래 추가 설정이 필요합니다.
+>
+> 1. YOLOv5 클론 (프로젝트 루트에서 실행):
+>    ```bash
+>    git clone https://github.com/ultralytics/yolov5 yolov5
+>    pip install -r yolov5/requirements.txt
+>    ```
+> 2. 학습된 모델 파일 `best.pt`를 `assets/models/best.pt` 경로에 배치
 
 ---
 
