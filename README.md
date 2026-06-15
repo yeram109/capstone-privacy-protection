@@ -58,7 +58,7 @@ capstone-privacy-protection/
 - 웹캠
 
 ```bash
-pip install opencv-python mediapipe numpy Pillow torch
+pip install -r requirements.txt
 ```
 
 > **GUI 앱의 Eye Detection / Eye Blurring 기능** 사용 시 YOLOv5 커스텀 모델(`best.pt`)이 추가로 필요합니다.

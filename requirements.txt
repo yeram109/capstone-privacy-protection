@@ -1,0 +1,21 @@
+# 핵심 영상 처리
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# 실시간 랜드마크 감지 (홍채, 지문)
+mediapipe>=0.10.0
+
+# GUI 이미지 처리
+Pillow>=10.0.0
+
+# 홍채 인식 알고리즘
+scipy>=1.11.0
+PyWavelets>=1.4.0
+
+# Jupyter Notebook 실행
+jupyter>=1.0.0
+
+# YOLOv5 기반 홍채 검출 (GUI Eye Detection / Eye Blurring 기능)
+# 아래 패키지는 YOLOv5 커스텀 모델 사용 시에만 필요
+torch>=2.0.0
+torchvision>=0.15.0
