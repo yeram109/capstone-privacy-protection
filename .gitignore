@@ -21,6 +21,9 @@ env/
 *.pth
 *.weights
 
+# 외부 라이브러리 (별도 클론)
+yolov5/
+
 # IDE
 .vscode/
 .idea/
