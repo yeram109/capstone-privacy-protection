@@ -9,8 +9,16 @@ import sys
 from pathlib import Path
 import os
 
-# YOLOv5 저장소 경로 추가
-sys.path.append('C:\\Users\\toror\\Downloads\\hongchae-parkhyun\\yolov5')
+# 프로젝트 루트 (src/gui/ 기준 2단계 상위)
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
+# YOLOv5 저장소 경로 — 환경 변수 YOLOV5_DIR 또는 프로젝트 루트의 yolov5/ 폴더
+YOLOV5_DIR = Path(os.environ.get("YOLOV5_DIR", _PROJECT_ROOT / "yolov5"))
+sys.path.append(str(YOLOV5_DIR))
+
+# 디버그 이미지 저장 폴더
+OUTPUT_DIR = Path(os.environ.get("OUTPUT_DIR", _PROJECT_ROOT / "outputs"))
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 from models.common import DetectMultiBackend
 from utils.general import non_max_suppression
@@ -29,8 +37,8 @@ face_mesh = mp_face_mesh.FaceMesh(
     min_tracking_confidence=0.5
 )
 
-# YOLOv5 모델 로드
-model_path = "C:\\Users\\toror\\Downloads\\hongchae-parkhyun\\yolov5\\runs\\train\\exp\\weights\\best.pt"
+# YOLOv5 모델 경로 — 환경 변수 YOLO_MODEL_PATH 또는 assets/models/best.pt
+model_path = Path(os.environ.get("YOLO_MODEL_PATH", _PROJECT_ROOT / "assets" / "models" / "best.pt"))
 device = select_device('cpu')
 model = DetectMultiBackend(weights=str(model_path), device=device)
 
@@ -309,7 +317,7 @@ class App:
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)  # 파란색 바운딩 박스 (BGR 형식으로 (255, 0, 0))
 
                     # 검출된 눈 영역을 이미지로 저장 (YOLO에 넣기 전)
-                    eye_img_path = os.path.join("C:\\Users\\toror\\Downloads", f"eye_{self.frame_count}.png")
+                    eye_img_path = str(OUTPUT_DIR / f"eye_{self.frame_count}.png")
                     cv2.imwrite(eye_img_path, roi_color)
                     self.frame_count += 1
 
@@ -348,7 +356,7 @@ class App:
                                     roi_color[eye_y1:eye_y2, eye_x1:eye_x2] = blurred_eye_roi
 
                                     # YOLO 검출 성공 후 이미지 저장
-                                    yolo_img_path = os.path.join("C:\\Users\\toror\\Downloads", f"detect_{self.detect_count}.png")
+                                    yolo_img_path = str(OUTPUT_DIR / f"detect_{self.detect_count}.png")
                                     cv2.imwrite(yolo_img_path, roi_color)
                                     self.detect_count += 1
 
